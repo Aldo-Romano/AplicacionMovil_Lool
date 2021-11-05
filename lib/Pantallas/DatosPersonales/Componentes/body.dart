@@ -1,3 +1,4 @@
+import 'package:aplicacion_movil_lool/Pantallas/Productos/pantalla_productos.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Registro/Componentes/background.dart';
 import 'package:aplicacion_movil_lool/Componentes/boton_redeondeado.dart';
@@ -56,7 +57,16 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: "REGISTRAR",
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ProductScreen();
+                    },
+                  ),
+                );
+              },
             ),
           ],
         ),
