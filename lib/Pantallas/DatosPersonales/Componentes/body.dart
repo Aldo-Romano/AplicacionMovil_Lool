@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:aplicacion_movil_lool/Pantallas/Login/pantalla_login.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Registro/Componentes/background.dart';
-import 'package:aplicacion_movil_lool/Pantallas/Registro/Componentes/dividir.dart';
-import 'package:aplicacion_movil_lool/Componentes/cuenta_existente.dart';
 import 'package:aplicacion_movil_lool/Componentes/boton_redeondeado.dart';
 import 'package:aplicacion_movil_lool/Componentes/campo_entrada.dart';
-import 'package:aplicacion_movil_lool/Componentes/campo_contraseña.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Body extends StatelessWidget {
@@ -18,7 +14,7 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "REGISTRATE",
+              "DATOS PERSONALES",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             SizedBox(height: size.height * 0.03),
@@ -27,38 +23,44 @@ class Body extends StatelessWidget {
               height: size.height * 0.35,
             ),
             RoundedInputField(
-              hintText: "Nombre de Usuario",
+              hintText: "Nombre",
               onChanged: (value) {},
             ),
             RoundedInputField(
-              hintText: "Correo electrónico",
+              hintText: "Apellido Paterno",
               onChanged: (value) {},
             ),
-            RoundedPasswordField(
+            RoundedInputField(
+              hintText: "Apellido Materno",
+              onChanged: (value) {},
+            ),
+            RoundedInputField(
+              hintText: "Teléfono",
+              onChanged: (value) {},
+            ),
+            RoundedInputField(
+              hintText: "Correo Alternativo",
+              onChanged: (value) {},
+            ),
+            RoundedInputField(
+              hintText: "Dirreción",
+              onChanged: (value) {},
+            ),
+            RoundedInputField(
+              hintText: "Codigo Postal",
+              onChanged: (value) {},
+            ),
+            RoundedInputField(
+              hintText: "Ciudad",
               onChanged: (value) {},
             ),
             RoundedButton(
-              text: "REGISTRARSE",
+              text: "REGISTRAR",
               press: () {},
             ),
-            SizedBox(height: size.height * 0.03),
-            AlreadyHaveAnAccountCheck(
-              login: false,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ),
-                );
-              },
-            ),
-            OrDivider(),
           ],
         ),
       ),
-    );
+  );
   }
 }

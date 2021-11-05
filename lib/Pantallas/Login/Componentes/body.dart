@@ -1,3 +1,4 @@
+import 'package:aplicacion_movil_lool/Pantallas/DatosPersonales/pantalla_datospersonales.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Login/Componentes/background.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Registro/pantalla_registro.dart';
@@ -39,7 +40,16 @@ class Body extends StatelessWidget {
             ),
             RoundedButton(
               text: "INICIAR SESIÓN",
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return PersonalScreen();
+                    },
+                  ),
+                );
+              },
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(
