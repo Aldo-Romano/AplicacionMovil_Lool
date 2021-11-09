@@ -35,6 +35,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.19.1
 
+  http:
+  toast: ^0.1.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

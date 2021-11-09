@@ -33,10 +33,11 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.03),
             RoundedInputField(
               hintText: "Correo electrónico",
-              onChanged: (value) {},
+              onChanged: (controlCorreo) {
+              },
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (controlContrasenia) {},
             ),
             RoundedButton(
               text: "INICIAR SESIÓN",
