@@ -1,5 +1,5 @@
-import 'package:aplicacion_movil_lool/Pantallas/DatosPersonales/pantalla_datospersonales.dart';
 import 'package:flutter/material.dart';
+import 'package:aplicacion_movil_lool/Pantallas/DatosPersonales/pantalla_datospersonales.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Login/Componentes/background.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Registro/pantalla_registro.dart';
 import 'package:aplicacion_movil_lool/Componentes/cuenta_existente.dart';
@@ -7,11 +7,17 @@ import 'package:aplicacion_movil_lool/Componentes/boton_redeondeado.dart';
 import 'package:aplicacion_movil_lool/Componentes/campo_entrada.dart';
 import 'package:aplicacion_movil_lool/Componentes/campo_contraseña.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:aplicacion_movil_lool/LogicaNegocios/obtener_usuarios.dart';
+import '../pantalla_login.dart';
+
 
 class Body extends StatelessWidget {
-  const Body({
+   Body({
     Key? key,
   }) : super(key: key);
+
+   TextEditingController user = new TextEditingController();
+   TextEditingController pass = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,7 @@ class Body extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               "INICIAR SESIÓN",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -33,23 +39,18 @@ class Body extends StatelessWidget {
             SizedBox(height: size.height * 0.03),
             RoundedInputField(
               hintText: "Correo electrónico",
-              onChanged: (controlCorreo) {
-              },
+               controller: user,
+               onChanged: (String value) {  },
             ),
             RoundedPasswordField(
-              onChanged: (controlContrasenia) {},
+             onChanged: (String value) {  },
+              controller: pass,
             ),
             RoundedButton(
               text: "INICIAR SESIÓN",
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return PersonalScreen();
-                    },
-                  ),
-                );
+              //obtener(user, pass);
+                return PersonalScreen();
               },
             ),
             SizedBox(height: size.height * 0.03),
@@ -59,6 +60,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
+                     // return SignUpScreen();
                       return SignUpScreen();
                     },
                   ),
@@ -71,3 +73,5 @@ class Body extends StatelessWidget {
     );
   }
 }
+
+

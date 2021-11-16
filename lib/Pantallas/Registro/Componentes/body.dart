@@ -1,3 +1,4 @@
+import 'package:aplicacion_movil_lool/LogicaNegocios/InsertarRegistro.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Login/pantalla_login.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Registro/Componentes/background.dart';
@@ -8,7 +9,14 @@ import 'package:aplicacion_movil_lool/Componentes/campo_entrada.dart';
 import 'package:aplicacion_movil_lool/Componentes/campo_contraseña.dart';
 import 'package:flutter_svg/svg.dart';
 
+
 class Body extends StatelessWidget {
+
+  TextEditingController name = new TextEditingController();
+  TextEditingController correo = new TextEditingController();
+  TextEditingController pass = new TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,18 +36,30 @@ class Body extends StatelessWidget {
             ),
             RoundedInputField(
               hintText: "Nombre de Usuario",
+              controller: name,
               onChanged: (value) {},
             ),
             RoundedInputField(
               hintText: "Correo electrónico",
+              controller: correo,
               onChanged: (value) {},
             ),
             RoundedPasswordField(
-              onChanged: (value) {},
+              onChanged: (value) {}, controller: pass,
             ),
             RoundedButton(
               text: "REGISTRARSE",
-              press: () {},
+              press: () {
+                    insertar(name,correo,pass);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return LoginScreen();
+                        },
+                      ),
+                    );
+              },
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(

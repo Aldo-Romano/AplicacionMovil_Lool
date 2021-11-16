@@ -5,11 +5,13 @@ import 'package:aplicacion_movil_lool/constants.dart';
 
 class RoundedInputField extends StatelessWidget {
   final String hintText;
+  final TextEditingController controller;
   final IconData icon;
   final ValueChanged<String> onChanged;
   const RoundedInputField({
     Key? key,
     required this.hintText,
+    required this.controller,
     this.icon = Icons.person,
     required this.onChanged,
   }) : super(key: key);
@@ -18,6 +20,7 @@ class RoundedInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
+        controller: controller,
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(

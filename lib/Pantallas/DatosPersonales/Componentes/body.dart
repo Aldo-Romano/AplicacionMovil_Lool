@@ -6,6 +6,15 @@ import 'package:aplicacion_movil_lool/Componentes/campo_entrada.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Body extends StatelessWidget {
+  TextEditingController name = new TextEditingController();
+  TextEditingController app = new TextEditingController();
+  TextEditingController apm = new TextEditingController();
+  TextEditingController tel = new TextEditingController();
+  TextEditingController correo = new TextEditingController();
+  TextEditingController direc = new TextEditingController();
+  TextEditingController cp = new TextEditingController();
+  TextEditingController ciudad = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -25,35 +34,35 @@ class Body extends StatelessWidget {
             ),
             RoundedInputField(
               hintText: "Nombre",
-              onChanged: (value) {},
+              onChanged: (value) {}, controller: name,
             ),
             RoundedInputField(
               hintText: "Apellido Paterno",
-              onChanged: (value) {},
+              onChanged: (value) {}, controller: app,
             ),
             RoundedInputField(
               hintText: "Apellido Materno",
-              onChanged: (value) {},
+              onChanged: (value) {}, controller: apm,
             ),
             RoundedInputField(
               hintText: "Teléfono",
-              onChanged: (value) {},
+              onChanged: (value) {}, controller: tel,
             ),
             RoundedInputField(
               hintText: "Correo Alternativo",
-              onChanged: (value) {},
+              onChanged: (value) {}, controller: correo,
             ),
             RoundedInputField(
               hintText: "Dirreción",
-              onChanged: (value) {},
+              onChanged: (value) {}, controller: direc,
             ),
             RoundedInputField(
               hintText: "Codigo Postal",
-              onChanged: (value) {},
+              onChanged: (value) {}, controller: cp,
             ),
             RoundedInputField(
               hintText: "Ciudad",
-              onChanged: (value) {},
+              onChanged: (value) {}, controller: ciudad,
             ),
             RoundedButton(
               text: "REGISTRAR",
