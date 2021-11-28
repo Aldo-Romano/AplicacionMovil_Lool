@@ -1,9 +1,11 @@
+import 'package:aplicacion_movil_lool/LogicaNegocios/InsertarDatosPersonales.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Productos/pantalla_productos.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Registro/Componentes/background.dart';
 import 'package:aplicacion_movil_lool/Componentes/boton_redeondeado.dart';
 import 'package:aplicacion_movil_lool/Componentes/campo_entrada.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:aplicacion_movil_lool/LogicaNegocios/InsertarRegistro.dart';
 
 class Body extends StatelessWidget {
   TextEditingController name = new TextEditingController();
@@ -11,7 +13,7 @@ class Body extends StatelessWidget {
   TextEditingController apm = new TextEditingController();
   TextEditingController tel = new TextEditingController();
   TextEditingController correo = new TextEditingController();
-  TextEditingController direc = new TextEditingController();
+  TextEditingController dir = new TextEditingController();
   TextEditingController cp = new TextEditingController();
   TextEditingController ciudad = new TextEditingController();
 
@@ -54,7 +56,7 @@ class Body extends StatelessWidget {
             ),
             RoundedInputField(
               hintText: "Dirreción",
-              onChanged: (value) {}, controller: direc,
+              onChanged: (value) {}, controller: dir,
             ),
             RoundedInputField(
               hintText: "Codigo Postal",
@@ -67,6 +69,7 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: "REGISTRAR",
               press: () {
+                insertarDatos(name,app,apm,tel,correo,dir,cp,ciudad);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

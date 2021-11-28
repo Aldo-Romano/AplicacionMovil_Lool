@@ -1,3 +1,4 @@
+import 'package:aplicacion_movil_lool/Pantallas/Productos/pantalla_productos.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicacion_movil_lool/Pantallas/DatosPersonales/pantalla_datospersonales.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Login/Componentes/background.dart';
@@ -18,6 +19,7 @@ class Body extends StatelessWidget {
 
    TextEditingController user = new TextEditingController();
    TextEditingController pass = new TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +51,16 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: "INICIAR SESIÓN",
               press: () {
-              //obtener(user, pass);
-                return PersonalScreen();
+               obtener(user, pass);
+               Navigator.push(
+                 context,
+                 MaterialPageRoute(
+                   builder: (context) {
+                     // return SignUpScreen();
+                     return ProductScreen();
+                   },
+                 ),
+               );
               },
             ),
             SizedBox(height: size.height * 0.03),

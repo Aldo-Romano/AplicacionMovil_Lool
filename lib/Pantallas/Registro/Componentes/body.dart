@@ -1,4 +1,5 @@
-import 'package:aplicacion_movil_lool/LogicaNegocios/InsertarRegistro.dart';
+import 'package:aplicacion_movil_lool/Pantallas/DatosPersonales/pantalla_datospersonales.dart';
+import 'package:aplicacion_movil_lool/Pantallas/Productos/pantalla_productos.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Login/pantalla_login.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Registro/Componentes/background.dart';
@@ -8,6 +9,7 @@ import 'package:aplicacion_movil_lool/Componentes/boton_redeondeado.dart';
 import 'package:aplicacion_movil_lool/Componentes/campo_entrada.dart';
 import 'package:aplicacion_movil_lool/Componentes/campo_contraseña.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:aplicacion_movil_lool/LogicaNegocios/InsertarRegistro.dart';
 
 
 class Body extends StatelessWidget {
@@ -55,7 +57,7 @@ class Body extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return LoginScreen();
+                          return PersonalScreen();
                         },
                       ),
                     );
