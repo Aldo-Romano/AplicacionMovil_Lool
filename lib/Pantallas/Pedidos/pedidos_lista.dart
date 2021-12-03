@@ -1,7 +1,14 @@
+// @dart=2.9
+import 'package:aplicacion_movil_lool/Pantallas/DatosPersonales/pantalla_datospersonales.dart';
+import 'package:fancy_dialog/FancyAnimation.dart';
+import 'package:fancy_dialog/FancyTheme.dart';
+import 'package:fancy_dialog/fancy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicacion_movil_lool/Models/productos_model.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Cart extends StatefulWidget {
   final List<ProductosModel> _cart;
@@ -12,14 +19,18 @@ class Cart extends StatefulWidget {
   _CartState createState() => _CartState(this._cart);
 }
 
+
 class _CartState extends State<Cart> {
+
   _CartState(this._cart);
   final _scrollController = ScrollController();
   var _firstScroll = true;
   bool _enabled = false;
 
+
   List<ProductosModel> _cart;
   int q =1;
+
   Container pagoTotal(List<ProductosModel> _cart) {
     return Container(
       alignment: Alignment.centerRight,
@@ -29,8 +40,6 @@ class _CartState extends State<Cart> {
       color: Colors.grey[200],
       child: Row(
         children: <Widget>[
-          // Text("Total:  \$${valorTotal(_cart)}",
-          //Text("Total:  ",
           Text("Total:  \$${valorTotal(_cart)}",
               style: new TextStyle(
                   fontWeight: FontWeight.bold,
@@ -41,12 +50,11 @@ class _CartState extends State<Cart> {
     );
   }
 
-  String valorTotal(List<ProductosModel> listaProductos) {
+  String valorTotal(_cart) {
     double total = 0.0;
-
-
-    for (int i = 0; i < listaProductos.length; i++) {
-      total = total + int.parse(listaProductos[i].price) * q;
+    for (int i = 0; i < _cart.length; i++) {
+      //total = total + _cart[i].price * _cart[i].quantity;
+     total = total + int.parse(_cart[i].price) * q;
     }
     return total.toStringAsFixed(2);
   }
@@ -57,7 +65,7 @@ class _CartState extends State<Cart> {
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.store, size: 40,),
+            icon: Icon(Icons.store),
             onPressed: null,
             color: Colors.white,
           )
@@ -65,7 +73,7 @@ class _CartState extends State<Cart> {
         title: Text('Detalle',
             style: new TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 18.0,
+                fontSize: 14.0,
                 color: Colors.white)),
         centerTitle: true,
         leading: IconButton(
@@ -101,7 +109,6 @@ class _CartState extends State<Cart> {
                     itemBuilder: (context, index) {
                       final String imagen = _cart[index].image;
                       var item = _cart[index];
-                      //item.quantity = 0;
                       return Column(
                         children: <Widget>[
                           Padding(
@@ -133,11 +140,11 @@ class _CartState extends State<Cart> {
                                               width: 120,
                                               height: 40,
                                               decoration: BoxDecoration(
-                                                  color: Colors.grey[600],
+                                                  color: Colors.red[600],
                                                   boxShadow: [
                                                     BoxShadow(
                                                       blurRadius: 6.0,
-                                                      color: Colors.blue,
+                                                      color: Colors.blue[400],
                                                       offset: Offset(0.0, 1.0),
                                                     )
                                                   ],
@@ -156,13 +163,15 @@ class _CartState extends State<Cart> {
                                                   IconButton(
                                                     icon: Icon(Icons.remove),
                                                     onPressed: () {
-                                                      _removeProduct(index);
-                                                      valorTotal(_cart);
-                                                      // print(_cart);
+                                                      setState(() {
+                                                        q--;
+                                                        //_cart[index].quantity--;
+                                                        valorTotal(_cart);
+                                                      });
                                                     },
                                                     color: Colors.yellow,
                                                   ),
-                                                  Text('${_cart[index].quantity}',
+                                                  Text(q.toString(),
                                                       style: new TextStyle(
                                                           fontWeight:
                                                           FontWeight.bold,
@@ -171,11 +180,13 @@ class _CartState extends State<Cart> {
                                                   IconButton(
                                                     icon: Icon(Icons.add),
                                                     onPressed: () {
-                                                      _addProduct(index);
-                                                      valorTotal(_cart);
+                                                      setState(() {
+                                                        q++;
+                                                        //_cart[index].quantity++;
+                                                        valorTotal(_cart);
+                                                      });
                                                     },
-                                                    color: Colors
-                                                        .yellow, // print(_cart);
+                                                    color: Colors.yellow,
                                                   ),
                                                   SizedBox(
                                                     height: 8.0,
@@ -223,6 +234,18 @@ class _CartState extends State<Cart> {
                       color: Colors.green,
                       child: Text("PAGAR"),
                       onPressed: () => {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => FancyDialog(
+                              title: "Aceptar compra",
+                              descreption: "Enviar por WhatsApp",
+                              animationType: FancyAnimation.BOTTOM_TOP,
+                              theme: FancyTheme.FANCY,
+                              gifPath: './assets/imagenes/comprar.gif',
+                              okFun: () => {
+                                msgListaPedido(),
+                              },
+                            ))
                       },
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0),
@@ -234,15 +257,37 @@ class _CartState extends State<Cart> {
     );
   }
 
-  _addProduct(int index) {
-    setState(() {
-      q++;
-    });
-  }
+  void msgListaPedido() async {
+    String pedido = "";
+    String fecha = DateTime.now().toString();
+    pedido = pedido + "FECHA:" + fecha.toString();
+    pedido = pedido + "\n";
+    pedido = pedido + "MEGA DESCUENTOS A DOMICILIO";
+    pedido = pedido + "\n";
+    pedido = pedido + "CLIENTE: FLUTTER - DART";
+    pedido = pedido + "\n";
+    pedido = pedido + "_____________";
 
-  _removeProduct(int index) {
-    setState(() {
-      q--;
-    });
+    for (int i = 0; i < _cart.length; i++) {
+      pedido = '$pedido' +
+          "\n" +
+          "Producto : " +
+          _cart[i].name +
+          "\n" +
+          "Cantidad: " +
+          //q.toString() +
+          _cart[i].quantity.toString() +
+          "\n" +
+          "Precio : " +
+          _cart[i].price.toString() +
+          "\n" +
+          "\_________________________\n";
+    }
+    pedido = pedido + "TOTAL:" + valorTotal(_cart);
+
+    await launch("https://wa.me/${522229075877}?text=$pedido");
+
+    await launch("https://wa.me/${522228353898}?text=$pedido");
+
   }
 }

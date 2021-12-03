@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-insertar(TextEditingController name, TextEditingController correo,TextEditingController pass) async
+insertar(TextEditingController name, TextEditingController correo,TextEditingController pass ) async
 {
 
-    var url = "http://192.168.1.67/Conexion/InsertarRegistro.php";
+    var url = "http://192.168.1.69/Conexion/InsertarRegistro.php";
     final response = await http.post(Uri.parse(url) ,
         body: {
           "NombreUsuario": name.text,

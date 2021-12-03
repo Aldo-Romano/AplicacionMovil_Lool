@@ -7,7 +7,7 @@ insertarDatos(TextEditingController name, TextEditingController app,TextEditingC
     TextEditingController cp,TextEditingController ciudad) async
 {
 
-  var url = "http://192.168.1.67/Conexion/insertarDatos.php";
+  var url = "http://192.168.1.79/Conexion/insertarDatos.php";
   final response = await http.post(Uri.parse(url) ,
       body: {
         "Nombre": name.text,

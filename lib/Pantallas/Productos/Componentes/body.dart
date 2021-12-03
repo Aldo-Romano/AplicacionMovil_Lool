@@ -1,15 +1,12 @@
 // @dart=2.9
 import 'package:aplicacion_movil_lool/LogicaNegocios/mostrar_productos.dart';
 import 'package:aplicacion_movil_lool/Pantallas/DatosPersonales/pantalla_datospersonales.dart';
-import 'package:aplicacion_movil_lool/Pantallas/Pedidos/crear_productos.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Productos/pantalla_productos.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aplicacion_movil_lool/Models/productos_model.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Pedidos/otra_pagina.dart';
 import 'package:aplicacion_movil_lool/Pantallas/Pedidos/pedidos_lista.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class BodyProductos extends StatefulWidget {
@@ -25,9 +22,8 @@ class _BodyProductosPageState extends State<BodyProductos> {
 
   List<ProductosModel> _productosModel = [];
 
-  //List<ProductosModel> _productosModel = List<ProductosModel>();
-
   List<ProductosModel> _listaCarro = [];
+
 
   @override
   void initState() {
@@ -143,54 +139,6 @@ class _BodyProductosPageState extends State<BodyProductos> {
                         )),
                   ),
                   new Divider(),
-                  new ListTile(
-                    title: new Text(
-                      'Tiendas',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    trailing: new Icon(
-                      Icons.place,
-                      size: 30.0,
-                      color: Colors.white,
-                    ),
-                    onTap: () =>
-                        Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (BuildContext context) => OtraPagina(),
-                        )),
-                  ),
-                  new Divider(),
-                  new ListTile(
-                    title: new Text(
-                      'Produtos',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    trailing: new Icon(
-                      Icons.fastfood,
-                      size: 30.0,
-                      color: Colors.white,
-                    ),
-                    onTap: () =>
-                        Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (BuildContext context) => CrearProductos(),
-                        )),
-                  ),
-                  new Divider(),
-                  new ListTile(
-                    title: new Text(
-                      'QR Code',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    trailing: new FaIcon(
-                      FontAwesomeIcons.qrcode,
-                      color: Colors.white,
-                      size: 30.0,
-                    ),
-                    onTap: () =>
-                        Navigator.of(context).push(new MaterialPageRoute(
-                          builder: (BuildContext context) => OtraPagina(),
-                        )),
-                  ),
-                  new Divider(),
                 ],
               ),
             ),
@@ -225,20 +173,13 @@ class _BodyProductosPageState extends State<BodyProductos> {
                                               24)),
                                       child: AspectRatio(
                                         aspectRatio: 1,
-                                        child: CachedNetworkImage(
-                                            imageUrl:
-                                            '${_productosModel[index].image}' +
-                                                '?alt=media',
-                                            fit: BoxFit.cover,
-                                            placeholder: (_, __) {
-                                              return Center(
-                                                  child: CupertinoActivityIndicator(
-                                                    radius: 15,
-                                                  ));
-                                            }),
+                                        child: Image.asset(
+                                            "assets/imagenes/" +
+                                                '${_productosModel[index].image}',
+                                            fit: BoxFit.contain),
+                                           ),
                                       ),
                                     ),
-                                  ),
                                 ],
                               );
                             },
@@ -275,19 +216,10 @@ class _BodyProductosPageState extends State<BodyProductos> {
                                           .center,
                                       children: <Widget>[
                                         Expanded(
-                                          child: CachedNetworkImage(
-                                              imageUrl:
-                                              '${_productosModel[index]
-                                                  .image}' +
-                                                  '?alt=media',
-                                              fit: BoxFit.cover,
-                                              placeholder: (_, __) {
-                                                return Center(
-                                                    child:
-                                                    CupertinoActivityIndicator(
-                                                      radius: 15,
-                                                    ));
-                                              }),
+                                          child: Image.asset(
+                                              "assets/imagenes/" +
+                                                  '${_productosModel[index].image}',
+                                              fit: BoxFit.contain),
                                         ),
                                         Text(
                                           '${_productosModel[index].name}',

@@ -1,24 +1,35 @@
-import 'package:aplicacion_movil_lool/Componentes/boton_redeondeado.dart';
-import 'package:aplicacion_movil_lool/Pantallas/Login/pantalla_login.dart';
-import 'package:aplicacion_movil_lool/Pantallas/Productos/pantalla_productos.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-obtener(TextEditingController user, TextEditingController pass) async {
+String msj= "";
+String username= "";
 
-    var url = "http://192.168.1.79/Conexion/obtenerUsuario.php";
-    final response = await http.post(Uri.parse(url), body: {
-      "Correo": user.text,
-      "Contra": pass.text
-    });
+Future<String> obtener(TextEditingController user, TextEditingController pass)async {
 
-    if(response.body == "CORRECTO") {
+  var url = "http://192.168.1.69/Conexion/obtenerUsuario.php";
+  final response = await http.post(Uri.parse(url), body: {
+    "Correo": user.text,
+    "Contra": pass.text
+  });
+  var datauser = json.decode(response .body);
+
+    if(datauser[0]['Rol']=='Usuario')
+    {
+
+      (BuildContext context)
+      {
+        Navigator.pushReplacementNamed(context, '/pantalla_productos');
+      };
 
     }
-    else if(response.body == "ERROR")
+    else if(datauser[0]['Rol']=='Administrador')
+    {
+          (BuildContext context)
       {
-
-      }
+        Navigator.pushReplacementNamed(context, '/pantalla_productosAdmin');
+      };
 
   }
-
+  return datauser;
+}
